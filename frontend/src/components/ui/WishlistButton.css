@@ -1,0 +1,53 @@
+.wish-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink);
+}
+
+.wish-btn__circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--r-pill);
+  background: #fff;
+  transition: transform var(--dur) var(--ease);
+}
+
+.wish-btn:hover .wish-btn__circle {
+  transform: scale(1.06);
+}
+
+.wish-btn--sm {
+  width: 40px;
+  height: 40px;
+}
+
+.wish-btn--inset .wish-btn__circle {
+  width: 32px;
+  height: 32px;
+}
+
+.wish-btn.is-active {
+  color: var(--sale);
+}
+
+@media (max-width: 768px) {
+  .wish-btn--sm {
+    width: 44px;
+    height: 44px;
+  }
+
+  .wish-btn--sm .wish-btn__circle {
+    width: 34px;
+    height: 34px;
+  }
+}

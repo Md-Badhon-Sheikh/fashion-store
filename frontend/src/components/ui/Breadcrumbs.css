@@ -1,0 +1,24 @@
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.breadcrumbs__item a {
+  color: var(--muted);
+}
+
+.breadcrumbs__item a:hover {
+  color: var(--brand);
+  text-decoration: underline;
+}
+
+.breadcrumbs__current {
+  color: var(--ink);
+  font-weight: 600;
+}

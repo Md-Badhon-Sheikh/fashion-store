@@ -1,0 +1,74 @@
+/* ---------- Checkout steps (Cart / Checkout / OrderSuccess) ---------- */
+.checkout-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.checkout-steps--center {
+  justify-content: center;
+}
+
+.checkout-steps__step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkout-steps__step.is-current {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.checkout-steps__sep {
+  color: var(--muted-2);
+}
+
+.checkout-steps__bar,
+.checkout-steps__mobile {
+  display: none;
+}
+
+/* Phone: progress bars with labels underneath (M-Checkout) */
+@media (max-width: 768px) {
+  .checkout-steps {
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 6px;
+    font-size: var(--fs-xs);
+  }
+
+  .checkout-steps__step {
+    flex: 1;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .checkout-steps__bar {
+    display: block;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--line-strong);
+  }
+
+  .checkout-steps__step.is-done .checkout-steps__bar,
+  .checkout-steps__step.is-current .checkout-steps__bar {
+    background: var(--brand);
+  }
+
+  .checkout-steps__sep,
+  .checkout-steps__desktop {
+    display: none;
+  }
+
+  .checkout-steps__mobile {
+    display: inline;
+  }
+}

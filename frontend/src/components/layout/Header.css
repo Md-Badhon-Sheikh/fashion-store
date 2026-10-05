@@ -1,0 +1,138 @@
+.site-header {
+  position: relative;
+  z-index: var(--z-header);
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+  padding-block: 16px;
+}
+
+.site-header__logo {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  color: var(--brand);
+  white-space: nowrap;
+}
+
+.site-header__logo:hover {
+  color: var(--brand-dark);
+}
+
+.site-header__nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 500;
+  font-size: var(--fs-base);
+}
+
+.site-header__nav-link {
+  display: inline-block;
+  padding-block: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.site-header__nav-link.is-active {
+  font-weight: 700;
+  border-bottom-color: var(--ink);
+}
+
+.site-header__nav-link.is-sale {
+  color: var(--sale);
+}
+
+.site-header__nav-link.is-sale.is-active {
+  border-bottom-color: var(--sale);
+}
+
+.site-header__search {
+  flex: 1 1 260px;
+}
+
+.site-header__actions {
+  display: flex;
+  gap: 4px;
+}
+
+.site-header__burger,
+.site-header__search-toggle {
+  display: none;
+}
+
+.site-header__mobile-search {
+  display: none;
+}
+
+/* ---------- ≤ 900px: hamburger header (M-Home) ---------- */
+@media (max-width: 900px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .site-header__inner {
+    flex-wrap: nowrap;
+    gap: 2px;
+    height: var(--header-h-mobile);
+    padding: 6px 8px;
+  }
+
+  .site-header__burger,
+  .site-header__search-toggle {
+    display: inline-flex;
+  }
+
+  .site-header__logo {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 20px;
+  }
+
+  .site-header__nav,
+  .site-header__search,
+  .site-header__account,
+  .site-header__wishlist {
+    display: none;
+  }
+
+  .site-header__actions {
+    gap: 2px;
+  }
+
+  .site-header__mobile-search {
+    display: block;
+    padding: 0 16px 12px;
+  }
+
+  .site-header__mobile-search .search-pill {
+    height: 46px;
+  }
+
+  .site-header__mobile-search input {
+    font-size: var(--fs-base);
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .site-header__inner {
+    gap: 12px 24px;
+  }
+
+  .site-header__nav ul {
+    gap: 4px 18px;
+  }
+}

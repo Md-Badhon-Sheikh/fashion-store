@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Orders — list (Orders.dc.html + M-AdminOrders.dc.html) and
+   order detail (OrderDetail.dc.html + order-detail part of M-AdminOrders.dc.html).
+   Loaded only by admin/orders/index and admin/orders/show. Builds on admin.css.
+   ========================================================================== */
+
+/* === Orders list === */
+.orders { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.ord-block { display: block; }
+
+/* Tab counts take the status tone while inactive (Orders.dc.html). */
+.ord-count--amber  { background: var(--tone-amber-bg);  color: var(--tone-amber-fg); }
+.ord-count--blue   { background: var(--tone-blue-bg);   color: var(--tone-blue-fg); }
+.ord-count--violet { background: var(--tone-violet-bg); color: var(--tone-violet-fg); }
+.ord-count--cyan   { background: var(--tone-cyan-bg);   color: var(--tone-cyan-fg); }
+.ord-count--green  { background: var(--tone-green-bg);  color: var(--tone-green-fg); }
+.ord-count--red    { background: var(--tone-red-bg);    color: var(--tone-red-fg); }
+.ord-count--gray   { background: var(--a-tag-bg);       color: var(--a-tag-fg); }
+.tab[aria-selected="true"] .ord-count { background: var(--ink); color: #FFFFFF; }
+
+/* Phone pill tabs: selected count is an accent dot (M-AdminOrders). */
+.ord-pill .pill-tab__count { background: var(--a-line-soft); color: var(--a-text-2); }
+.ord-pill[aria-selected="true"] .pill-tab__count { background: var(--a-accent); color: var(--ink); }
+
+/* Payment status line in the table */
+.ord-pay { font-size: 12px; font-weight: 700; }
+.ord-pay--green { color: var(--tone-green-fg); }
+.ord-pay--amber { color: var(--tone-amber-fg); }
+.ord-pay--gray  { color: var(--tone-gray-fg); }
+
+.orders-filters__reset { height: 40px; }
+.orders-per-page { width: auto; }
+
+/* Undo toast */
+.orders-toast {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--ink); color: #FFFFFF; border-radius: var(--r-md);
+  padding: 8px 8px 8px 14px; font-size: 14px;
+}
+.orders-toast .icon { color: #86EFAC; }
+.orders-toast__text { flex: 1; min-width: 0; }
+.orders-toast__undo {
+  height: 36px; padding: 0 12px; border: 0; border-radius: var(--r-sm);
+  background: transparent; color: var(--a-accent); font-weight: 700; font-size: 14px;
+}
+.orders-toast__undo:hover { background: rgba(255, 255, 255, 0.08); }
+.orders-toast__undo:focus-visible { outline-color: var(--a-accent); }
+
+/* Phone search */
+.orders-search {
+  display: flex; align-items: center; gap: 8px; height: 46px;
+  border: 1px solid var(--a-line); border-radius: var(--r-md); padding: 0 6px 0 14px;
+  background: #FFFFFF; color: var(--a-muted);
+}
+.orders-search:focus-within { border-color: var(--brand); box-shadow: var(--focus); }
+.orders-search input { flex: 1; min-width: 0; height: 100%; border: 0; outline: none; background: transparent; font-size: 15px; color: var(--ink); }
+.orders-search__scan {
+  width: 36px; height: 36px; border: 0; border-radius: var(--r-sm);
+  background: var(--a-bg); color: var(--ink); display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* Phone order cards (M-AdminOrders) */
+.orders-cards { display: flex; flex-direction: column; gap: 12px; }
+.orders-cards__meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--a-muted); }
+.orders-cards__empty {
+  background: #FFFFFF; border: 1px dashed var(--a-input-line); border-radius: var(--r-lg);
+  padding: 28px 16px; text-align: center; font-size: 14px; color: var(--a-muted);
+}
+.orders-cards__more { height: 46px; border-radius: var(--r-md); font-size: 15px; }
+.ord-card {
+  background: var(--a-card); border: 1px solid var(--a-line); border-radius: var(--r-lg);
+  padding: 14px; display: flex; flex-direction: column; gap: 10px; min-width: 0;
+}
+.ord-card__row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.ord-card__id { font-weight: 800; font-size: 16px; min-height: 32px; display: inline-flex; align-items: center; }
+.ord-card__meta { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; color: var(--a-muted); }
+.ord-card__phone { display: inline-flex; align-items: center; gap: 4px; color: var(--a-text-2); }
+.ord-card__items { font-size: 14px; color: var(--a-text-2); line-height: 1.45; }
+.ord-card__items strong { color: var(--ink); }
+.ord-card__foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; border-top: 1px solid var(--a-line-soft); padding-top: 10px; }
+.ord-card__pay { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: var(--r-xs); background: var(--tone-gray-bg); color: var(--tone-gray-fg); }
+.ord-card__pay.is-paid { background: var(--tone-green-bg); color: var(--tone-green-fg); }
+.ord-card__amount { font-family: var(--font-head); font-weight: 700; font-size: 20px; font-variant-numeric: tabular-nums; }
+.ord-card__actions { display: flex; gap: 8px; }
+.ord-card__primary { flex: 1; min-width: 0; font-size: 15px; }
+.ord-card__call { width: 96px; flex-shrink: 0; padding: 0 10px; font-size: 15px; font-weight: 700; }
+.ord-card__more { border-color: var(--a-input-line); }
+
+@media (max-width: 639.98px) {
+  /* The phone topbar shows "Orders"; keep the h1 for screen readers without an empty gap. */
+  .orders__header { position: absolute; }
+  .orders { gap: 12px; }
+  .orders-filters { display: none; }
+  .orders-filters.is-open { display: flex; }
+}
+
+/* === Order detail === */
+.od { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.od-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.od-head__text { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.od-head__title { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.od-head__actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.od-head__actions .select { width: auto; height: 44px; border-radius: var(--r); padding-left: 12px; }
+
+.step__mark { display: inline-flex; vertical-align: -2px; margin-right: 4px; }
+.step__dot { display: inline-block; width: 9px; height: 9px; border-radius: var(--r-pill); background: currentColor; margin: 0 3px 1px 0; vertical-align: middle; }
+.step__ring { display: inline-block; width: 10px; height: 10px; border-radius: var(--r-pill); border: 1.5px solid currentColor; margin: 0 3px 1px 0; vertical-align: middle; }
+
+.od-cols { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start; }
+.od-col { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.od-col--main { flex: 999 1 520px; }
+.od-col--side { flex: 1 1 320px; }
+
+.od-addr { border-top: 1px solid var(--a-line-soft); padding-top: 10px; line-height: 1.55; }
+.od-addr__label { font-weight: 700; margin-bottom: 4px; }
+.od-addr__text { white-space: pre-line; }
+.od-cur--amber  { color: var(--tone-amber-fg); }
+.od-cur--blue   { color: var(--tone-blue-fg); }
+.od-cur--violet { color: var(--tone-violet-fg); }
+.od-cur--cyan   { color: var(--tone-cyan-fg); }
+.od-cur--green  { color: var(--tone-green-fg); }
+.od-cur--red    { color: var(--tone-red-fg); }
+.od-cur--gray   { color: var(--tone-gray-fg); }
+.od-next { color: var(--ink); }
+.od-courier__phase { border-top: 1px dashed var(--a-input-line); padding-top: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.od-courier__phase .btn { height: 40px; font-size: 13px; }
+.od-tagline { font-size: 12px; font-weight: 700; color: var(--a-muted); }
+.od-due { display: flex; justify-content: space-between; color: var(--tone-amber-fg); font-weight: 700; }
+.od-notice { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding: 10px 0; border-top: 1px solid var(--a-line-soft); font-size: 14px; }
+.od-notice .tag { width: 52px; }
+.od-notice__text { flex: 1 1 260px; min-width: 0; color: var(--a-text-2); }
+.od-notice__state { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--tone-green-fg); }
+.od-note-label { font-size: 17px; font-weight: 700; }
+
+/* Phone-only blocks */
+.od-summary { display: flex; flex-direction: column; gap: 10px; }
+.od-summary__title { font-family: var(--font-head); font-size: 22px; font-weight: 700; }
+.od-summary__total { text-align: right; }
+.od-summary__amount { font-family: var(--font-head); font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Vertical stepper (phone) */
+.vsteps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.vstep { display: flex; gap: 14px; }
+.vstep__rail { display: flex; flex-direction: column; align-items: center; width: 28px; flex-shrink: 0; }
+.vstep__node {
+  width: 28px; height: 28px; border-radius: var(--r-pill); border: 2px solid #C9CED4; background: #FFFFFF;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;
+}
+.vstep__pulse { width: 10px; height: 10px; border-radius: var(--r-pill); background: var(--brand); }
+.vstep__line { width: 2px; flex: 1; min-height: 24px; background: var(--a-line); }
+.vstep:last-child .vstep__line { display: none; }
+.vstep__body { padding: 3px 0 18px; min-width: 0; flex: 1; }
+.vstep__head { display: flex; justify-content: space-between; gap: 8px; }
+.vstep__name { font-size: 15px; font-weight: 600; color: var(--a-muted); }
+.vstep__time { font-size: 12px; color: var(--a-muted); white-space: nowrap; }
+.vstep__note { font-size: 13px; color: var(--a-muted); margin-top: 2px; }
+.vstep--done .vstep__node { border-color: var(--brand); background: var(--brand); }
+.vstep--now .vstep__node { border-color: var(--brand); }
+.vstep--done .vstep__line { background: var(--brand); }
+.vstep--done .vstep__name, .vstep--now .vstep__name { color: var(--ink); }
+.vstep--now .vstep__name { font-weight: 800; }
+
+/* Phone item list */
+.od-items-sm { display: flex; flex-direction: column; }
+.od-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--a-line-soft); }
+.od-item .thumb { width: 56px; height: auto; aspect-ratio: 3 / 4; border-radius: var(--r); }
+.od-item__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.od-item__line { display: flex; justify-content: space-between; font-size: 14px; font-variant-numeric: tabular-nums; margin-top: 2px; }
+
+/* Sticky bottom action bar (phone), sits above the tab bar */
+.od-actionbar { display: none; }
+
+@media (max-width: 639.98px) {
+  .od { gap: 14px; padding-bottom: 120px; }
+  .od-head { display: none; }
+  .od-cols { flex-direction: column; flex-wrap: nowrap; gap: 14px; align-items: stretch; }
+  .od-col { display: contents; }
+  /* Phone card order follows M-AdminOrders: customer, items, courier, payment, note, then history. */
+  .od-card--customer { order: 1; }
+  .od-card--items { order: 2; }
+  .od-card--courier { order: 3; }
+  .od-card--payment { order: 4; }
+  .od-card--note { order: 5; }
+  .od-card--activity { order: 6; }
+  .od-card--notices { order: 7; }
+  .od-cancel-sm { order: 8; }
+  .od-card--items .totals { max-width: none; border-top: 0; margin-top: 0; padding-top: 12px; }
+  .od-courier .input, .od-courier .select { height: 46px; border-radius: var(--r); font-size: 15px; }
+  .od-cancel-sm { height: 46px; font-size: 15px; }
+
+  .od-actionbar {
+    display: flex; flex-direction: column; gap: 10px;
+    position: fixed; left: 0; right: 0; z-index: 48;
+    bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+    background: #FFFFFF; border-top: 1px solid var(--a-line);
+    box-shadow: 0 -6px 18px rgba(15, 26, 21, 0.10);
+    padding: 12px 16px;
+  }
+  .od-actionbar__status { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--a-muted); }
+  .od-actionbar__buttons { display: flex; gap: 10px; }
+  .od-actionbar__print { width: 112px; height: 52px; border-radius: var(--r-md); font-size: 15px; font-weight: 700; }
+  .od-actionbar__update { flex: 1; height: 52px; border-radius: var(--r-md); font-size: 16px; font-weight: 800; }
+  .od-actionbar__update:disabled { border: 0; background: var(--a-muted); color: #FFFFFF; }
+}
+@media print {
+  .od-head__actions, .od-actionbar { display: none !important; }
+}

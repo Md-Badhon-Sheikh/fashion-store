@@ -1,0 +1,45 @@
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+.site__main {
+  flex: 1 0 auto;
+  outline: none;
+}
+
+/* Phone: announcement sits under the sticky header (M-Home) */
+@media (max-width: 900px) {
+  .site > .announcement {
+    order: 2;
+  }
+
+  .site > .site-header {
+    order: 1;
+  }
+
+  .site > .site__main,
+  .site > .site-footer {
+    order: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  /* These pages draw their own phone top bar (back button + title / gallery
+     controls), as in M-Product, M-Cart and M-Checkout — hide the shared one. */
+  .site[data-page='product'] > .site-header,
+  .site[data-page='product'] > .announcement,
+  .site[data-page='cart'] > .site-header,
+  .site[data-page='cart'] > .announcement,
+  .site[data-page='checkout'] > .site-header,
+  .site[data-page='checkout'] > .announcement {
+    display: none;
+  }
+
+  .site--with-tabbar {
+    padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
+  }
+}

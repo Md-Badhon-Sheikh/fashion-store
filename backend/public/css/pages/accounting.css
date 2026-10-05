@@ -1,0 +1,99 @@
+/* === Accounting === (Accounting.dc.html) — loaded only by admin/accounting/index */
+
+.acc { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.acc-col-3 { flex: 3 1 560px; min-width: 0; }
+.acc-col-2 { flex: 2 1 400px; min-width: 0; }
+.acc-col-add { flex: 2 1 340px; min-width: 0; }
+.acc-kpi .kpi__value { font-size: 26px; }
+.acc-h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+
+/* Header: range switch + dates + export */
+.acc-range { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.acc-dates { display: flex; gap: 8px; align-items: center; }
+.acc-dates .input { height: 44px; border-color: var(--a-line); border-radius: var(--r); width: 150px; }
+
+/* Info note */
+.acc-note {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: #FFF8E6; border: 1px solid #F3DFA8; border-radius: var(--r-md);
+  padding: 12px 14px; font-size: 14px; color: #5A4300;
+}
+.acc-note svg { margin-top: 1px; }
+
+/* Income vs expenses: the shared bar chart, paired per month (income + expense bar).
+   Bars and x labels stay aligned: 4px gap inside a pair, +14px after every pair. */
+.acc-chart .chart__bars, .acc-chart .chart__x { padding: 0 8px; }
+.acc-chart .chart__bars > .chart__bar:nth-child(2n):not(:last-child) { margin-right: 14px; }
+.acc-chart .chart__x > span:nth-child(2n) { display: none; }
+.acc-chart .chart__x > span:nth-child(2n + 1) { flex: 2; font-size: 12px; }
+.acc-chart .chart__x > span:nth-child(2n + 1):not(:nth-last-child(2)) { margin-right: 14px; }
+.acc-chart .chart__bar:nth-child(2n + 1) { align-items: flex-end; }
+.acc-chart .chart__bar:nth-child(2n) { align-items: flex-start; }
+.acc-chart .chart__seg { border-radius: 4px 4px 0 0; }
+.acc-details { margin-top: 12px; }
+.acc-details summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--brand); min-height: 32px; display: flex; align-items: center; }
+.acc-details .table-wrap { margin-top: 8px; }
+
+/* Income by channel */
+.acc-channels th, .acc-channels td { padding-left: 6px; padding-right: 6px; }
+.acc-channels td { padding-top: 10px; padding-bottom: 10px; }
+.acc-channels tfoot td { border-top: 1px solid #C9CED4; }
+.acc-share { min-width: 120px; }
+.acc-share, .acc-channels tfoot .acc-share__pct { white-space: nowrap; }
+.acc-share { display: flex; align-items: center; gap: 8px; }
+.acc-share__track { flex: 1; height: 8px; background: var(--chart-track); border-radius: 0 4px 4px 0; }
+.acc-share__fill { display: block; height: 100%; background: var(--brand); border-radius: 0 4px 4px 0; }
+.acc-share__pct { width: 34px; text-align: right; font-size: 13px; color: var(--a-text-2); }
+.acc-channels tfoot .acc-share__pct { text-align: left; }
+
+/* Expenses */
+.acc-expenses { gap: 16px; }
+.acc-cats { gap: 10px; }
+.acc-cat { grid-template-columns: minmax(120px, 170px) minmax(0, 1fr) 96px; gap: 12px; }
+.acc-table thead tr { background: var(--a-head-bg); }
+.acc-table td { padding-top: 10px; padding-bottom: 10px; }
+.acc-tag { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: var(--r-xs); background: var(--a-bg); border: 1px solid var(--a-line); white-space: nowrap; }
+.acc-new { background: var(--a-row-selected); }
+.acc-out { color: var(--tone-red-fg); }
+
+/* Add expense form */
+.acc-f { flex: 1 1 140px; }
+.acc-input { height: 44px; }
+.acc-amount {
+  display: flex; align-items: center; height: 44px; overflow: hidden;
+  border: 1px solid var(--a-input-line); border-radius: var(--r-sm); background: #FFFFFF;
+}
+.acc-amount:focus-within { border-color: var(--brand); box-shadow: var(--focus); }
+.acc-amount__cur { padding: 0 10px; color: var(--a-muted); font-weight: 400; }
+.acc-amount input { flex: 1; min-width: 0; height: 100%; border: 0; outline: none; background: transparent; font-size: 14px; font-weight: 700; }
+.acc-upload {
+  min-height: 72px; border: 1.5px dashed #9AA2AC; border-radius: var(--r); background: var(--a-head-bg);
+  font-size: 13px; color: var(--a-text-2); font-weight: 400; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px; text-align: center;
+}
+.acc-upload svg { color: var(--a-muted); }
+.acc-upload:hover { border-color: var(--brand); }
+.acc-upload:focus-within { outline: 2px solid var(--brand); outline-offset: 2px; }
+.acc-form__actions { justify-content: flex-end; }
+
+/* Transaction history */
+.acc-tx-head { align-items: center; margin-bottom: 12px; }
+.acc-seg { display: flex; background: var(--a-bg); border: 1px solid var(--a-line); border-radius: var(--r); padding: 3px; }
+.acc-seg__btn { height: 36px; padding: 0 14px; border: 0; border-radius: var(--r-sm); background: transparent; color: var(--ink); font-size: 13px; font-weight: 600; }
+.acc-seg__btn[aria-pressed="true"] { background: #FFFFFF; box-shadow: var(--shadow-sm); }
+.acc-table td.mono { font-size: 12px; }
+
+@media (max-width: 639.98px) {
+  .acc { gap: 16px; }
+  .acc-range { flex-direction: column; align-items: stretch; }
+  .acc-range .segmented { display: flex; width: 100%; border-radius: var(--r-md); overflow-x: auto; }
+  .acc-range .segmented__btn { flex: 1; height: 40px; padding: 0 10px; border-radius: 9px; }
+  .acc-dates .input { width: auto; flex: 1; }
+  .acc-dates label { flex: 1; }
+  .acc-kpi .kpi__value { font-size: 20px; }
+  .acc-cat { grid-template-columns: minmax(0, 1fr) 96px; gap: 6px 12px; }
+  .acc-cat .hbar__track { grid-column: 1 / -1; grid-row: 2; }
+  .acc-seg { width: 100%; }
+  .acc-seg__btn { flex: 1; height: 40px; }
+  .acc-form__actions { flex-direction: column-reverse; align-items: stretch; }
+}

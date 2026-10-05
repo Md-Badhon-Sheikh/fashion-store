@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Categories & brands (Categories.dc.html). Needs catalog-kit.css.
+   ========================================================================== */
+
+.cat-cols { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+.cat-tree { flex: 2 1 560px; min-width: 0; }
+.cat-side { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.cat-side .card { padding: 18px; }
+
+/* Tree table */
+.cat-table thead tr { background: var(--a-head-bg); }
+.cat-table th { padding: 10px 8px; }
+.cat-table th:first-child { padding-left: 16px; }
+.cat-table th:last-child, .cat-table td:last-child { padding-right: 16px; }
+.cat-table td { padding: 8px; }
+.cat-table .cat-table__grip { width: 36px; padding: 6px 4px 6px 12px; }
+.cat-row--parent { background: #FCFCFD; }
+.cat-table tr.is-selected { background: var(--brand-tint); box-shadow: inset 3px 0 0 var(--brand); }
+.cat-table td.cat-cell--child { padding-left: 34px; }
+.grip-btn {
+  width: 32px; height: 36px; border: 0; background: transparent; color: #7A828D; cursor: grab;
+  display: inline-flex; align-items: center; justify-content: center; border-radius: var(--r-xs);
+}
+.grip-btn:hover { background: var(--a-bg); color: var(--ink); }
+.tree-caret {
+  width: 24px; height: 32px; flex-shrink: 0; border: 0; padding: 0; background: transparent; color: var(--a-muted);
+  display: inline-flex; align-items: center; justify-content: center; border-radius: var(--r-xs);
+}
+.tree-caret:hover { background: var(--a-bg); color: var(--ink); }
+.tree-caret svg { transition: transform .15s ease; }
+.tree-caret[aria-expanded="false"] svg { transform: rotate(-90deg); }
+.tree-caret--empty { display: inline-block; }
+.tree-elbow {
+  width: 14px; height: 14px; flex-shrink: 0; margin-top: -10px;
+  border-left: 1.5px solid #C9CED4; border-bottom: 1.5px solid #C9CED4; border-radius: 0 0 0 4px;
+}
+.cat-table .cell-actions .btn + .btn { margin-left: 4px; }
+
+/* Edit form */
+.cat-photo { display: flex; align-items: flex-end; padding: 6px; font-size: 10px; color: #4A4238; }
+.cat-photo__ph { position: relative; }
+.cat-form-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.cat-form-row > .field:first-child { flex: 1 1 100px; }
+.cat-form-row > .field:last-child { flex: 1 1 140px; }
+.cat-form-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-top: 4px; }
+.btn--delete { background: #FFFFFF; border-color: #F3C4C0; color: var(--tone-red-fg); }
+.btn--delete:hover { background: #FEF3F2; color: var(--tone-red-fg); }
+
+/* Attributes card */
+.size-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.size-chip {
+  min-width: 36px; height: 32px; padding: 0 10px; border: 1px solid var(--a-input-line); border-radius: var(--r-sm);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--a-text-2);
+}
+.size-chip--strong { font-weight: 700; color: var(--ink); }
+.cat-attrs__sub { margin-top: 12px; }
+.colour-rows { list-style: none; margin-top: 4px; }
+.colour-rows__item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--a-line-soft); font-size: 14px; }
+.colour-rows__name { flex: 1; font-weight: 600; }
+.colour-rows__count { width: 84px; text-align: right; font-size: 12px; color: var(--a-muted); }
+.pick-dashed {
+  margin-top: 10px; height: 38px; padding: 0 12px; border-radius: var(--r-sm);
+  border: 1.5px dashed #C9CED4; background: #FFFFFF; font-size: 13px; font-weight: 600; color: var(--a-text-2);
+}
+.cat-attrs__fabrics { margin-top: 8px; font-size: 14px; color: var(--a-text-2); line-height: 1.6; }
+
+@media (max-width: 639.98px) {
+  .cat-tree .panel-head .btn { width: 100%; }
+}

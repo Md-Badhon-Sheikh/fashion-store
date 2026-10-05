@@ -1,0 +1,33 @@
+/* ==========================================================================
+   Suppliers (Suppliers.dc.html). Needs catalog-kit.css.
+   ========================================================================== */
+
+.sup-table thead tr, .sup-ledger-table thead tr { background: var(--a-head-bg); }
+.sup-table th:first-child, .sup-table td:first-child { padding-left: 18px; }
+.sup-table th:last-child, .sup-table td:last-child { padding-right: 18px; }
+.sup-table td { padding: 10px 8px; }
+.sup-table tr.is-selected { background: var(--brand-tint); box-shadow: inset 3px 0 0 var(--brand); }
+.sup-table .cell-actions .btn + .btn { margin-left: 4px; }
+.sup-table .btn--brand:disabled, .sup-card .btn--brand:disabled { background: var(--a-line); border: 0; color: var(--a-muted); }
+.sup-avatar {
+  width: 36px; height: 36px; flex-shrink: 0; border-radius: var(--r);
+  background: var(--a-avatar); color: var(--brand); font-weight: 700; font-size: 13px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.sup-due-tag { display: block; font-size: 11px; font-weight: 700; }
+
+/* Phone cards */
+.sup-cards { display: flex; flex-direction: column; }
+.sup-card { display: flex; flex-direction: column; gap: 8px; padding: 14px; border-top: 1px solid var(--a-line-soft); }
+.sup-card:first-child { border-top: 0; }
+.sup-card.is-selected { background: var(--brand-tint); box-shadow: inset 3px 0 0 var(--brand); }
+.sup-card__actions { display: flex; gap: 8px; }
+.sup-card__actions .btn { flex: 1; }
+
+/* Ledger + payment */
+.sup-cols { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+.sup-ledger { flex: 2 1 560px; min-width: 0; padding: 18px; }
+.sup-pay { flex: 1 1 320px; min-width: 0; padding: 18px; font-variant-numeric: tabular-nums; }
+.sup-ledger-table td { padding: 10px 8px; }
+.sup-ledger-table tr.is-opening { background: var(--a-head-bg); }
+.sup-ledger-table .cell-sub { margin-top: 2px; }

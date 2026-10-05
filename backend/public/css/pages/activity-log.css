@@ -1,0 +1,107 @@
+/* === Activity log (ActivityLog.dc.html) ===
+   Loaded only by resources/views/admin/activity-log/index.blade.php.
+   Builds on the shared classes in /css/admin.css. */
+
+.al { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.al .kpi__sub--warn { color: var(--tone-amber-fg); font-weight: 600; }
+
+/* Filters */
+.al-filter { padding: 18px 20px; gap: 14px; }
+.al-filter__form > .field { flex: 1 1 180px; }
+.al-filter__form > .al-field-date { flex: 1 1 150px; }
+.al-filter__form > .al-field-wide { flex: 1 1 200px; }
+.al-apply { height: 42px; border-radius: var(--r-sm); }
+.al-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.al-chip {
+  height: 36px; padding: 0 14px; border-radius: var(--r-pill);
+  border: 1px solid var(--a-input-line); background: #FFFFFF; color: var(--ink);
+  font-size: 13px; font-weight: 600; white-space: nowrap;
+}
+.al-chip:hover { border-color: #8A939D; }
+.al-chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #FFFFFF; }
+.al-chip__n { opacity: 0.8; font-variant-numeric: tabular-nums; }
+
+/* Timeline table */
+.al-table td { padding: 12px 8px; vertical-align: top; }
+.al-table .al-c-toggle, .al-table .al-c-sev { vertical-align: middle; }
+.al-c-details { max-width: 300px; }
+.al-action { display: inline-flex; gap: 6px; align-items: center; }
+.al-dot { width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--a-muted); flex-shrink: 0; }
+.al-dot--login { background: #5B6470; }
+.al-dot--sale { background: #166534; }
+.al-dot--status { background: #1E40AF; }
+.al-dot--product { background: #5B21B6; }
+.al-dot--price { background: #9A4A00; }
+.al-dot--stock { background: #155E75; }
+.al-dot--delete { background: #B42318; }
+.al-dot--settings { background: #16181D; }
+.al-target { font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+.al-ip { display: block; font-family: var(--font-mono); }
+.al-device { display: block; }
+.al-user { display: block; }
+.al-toggle { width: 36px; height: 36px; }
+.al-toggle .icon { transition: transform .15s ease; }
+.al-toggle[aria-expanded="true"] .icon { transform: rotate(180deg); }
+.al-table tr.is-expanded, .al-table tr.al-detail { background: #F8FAF9; }
+.al-table tr.al-detail { border-top: 0; }
+.al-table tr.al-detail > td { padding: 4px 8px 18px; }
+
+/* Before / after diff */
+.al-diff {
+  border: 1px solid var(--a-line); border-radius: var(--r-md); background: #FFFFFF;
+  padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;
+}
+.al-diff__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 13px; }
+.al-diff__table { font-size: 13px; }
+.al-diff__table th { font-size: 11px; padding: 6px 8px; }
+.al-diff__table td { padding: 8px; vertical-align: middle; }
+.al-diff__table th.al-diff__field { width: 28%; }
+.al-diff__table tbody th.al-diff__field {
+  text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 600; color: var(--ink); padding: 8px; white-space: normal;
+}
+.al-before, .al-after {
+  display: inline-block; padding: 3px 8px; border-radius: var(--r-xs);
+  font-family: var(--font-mono); font-size: 13px; overflow-wrap: anywhere;
+}
+.al-before { background: var(--tone-red-bg); color: var(--tone-red-fg); }
+.al-after { background: var(--tone-green-bg); color: var(--tone-green-fg); }
+
+.al-foot { margin-top: 14px; font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { .al-toggle .icon { transition: none; } }
+
+/* Tablets & phones: every entry becomes a card */
+@media (max-width: 767.98px) {
+  .al { gap: 16px; }
+  .al-apply { flex: 1 1 100%; }
+  .al-chips { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px; padding: 0 16px 4px; scrollbar-width: none; }
+  .al-chips::-webkit-scrollbar { display: none; }
+  .al-chip { flex-shrink: 0; height: 40px; }
+
+  .al-table { min-width: 0 !important; }
+  .al-table thead { display: none; }
+  .al-table, .al-table tbody { display: block; }
+  .al-table tbody tr.al-row {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px;
+    grid-template-areas: "action toggle" "target sev" "details details" "user user" "time ip";
+    padding: 14px 0;
+  }
+  .al-table tbody tr.al-row:first-child { border-top: 0; }
+  .al-table tr.al-row.is-expanded { padding: 14px 12px; border-radius: var(--r-md) var(--r-md) 0 0; }
+  .al-table tr.al-row > td { display: block; padding: 0; max-width: none; }
+  .al-c-action { grid-area: action; align-self: center; font-weight: 700; }
+  .al-c-toggle { grid-area: toggle; }
+  .al-c-target { grid-area: target; align-self: center; }
+  .al-c-sev { grid-area: sev; text-align: right; }
+  .al-c-details { grid-area: details; font-size: 14px; }
+  .al-c-user { grid-area: user; font-size: 13px; }
+  .al-c-user .al-user, .al-c-user .cell-sub { display: inline; }
+  .al-c-user .cell-sub::before { content: "· "; }
+  .al-c-time { grid-area: time; font-size: 12px; align-self: end; }
+  .al-c-ip { grid-area: ip; font-size: 12px; text-align: right; }
+  .al-toggle { width: 44px; height: 44px; }
+
+  .al-table tr.al-detail { display: block; padding: 0 12px 14px; border-radius: 0 0 var(--r-md) var(--r-md); }
+  .al-table tr.al-detail > td { display: block; padding: 0; }
+  .al-diff { padding: 12px; }
+  .al-diff__table { min-width: 0 !important; }
+}

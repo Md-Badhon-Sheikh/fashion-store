@@ -1,0 +1,42 @@
+/* ==========================================================================
+   Stock-in / purchases (StockIn.dc.html). Needs catalog-kit.css.
+   ========================================================================== */
+
+.si-section-title { font-size: 15px; font-weight: 700; font-family: var(--font-body); }
+
+/* Recent purchase cards */
+.po-card {
+  display: flex; flex-direction: column; gap: 6px; padding: 14px 16px;
+  background: var(--a-card); border: 1px solid var(--a-line); border-radius: var(--r-lg); color: var(--ink);
+}
+.po-card:hover { border-color: #C9CED4; color: var(--ink); }
+.po-card__row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.po-card__id { font-weight: 700; color: var(--brand); }
+.po-card__money { align-items: flex-end; font-size: 13px; font-variant-numeric: tabular-nums; }
+.po-card__amount { font-family: var(--font-head); font-weight: 700; font-size: 18px; }
+.po-card__due { display: block; font-weight: 700; }
+
+/* Layout */
+.si-cols { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+.si-main { flex: 2 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.si-side { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.si-side .card { padding: 18px; }
+
+/* Lines table */
+.si-table-wrap { border: 1px solid var(--a-line); border-radius: var(--r-md); overflow-x: auto; }
+.si-table thead tr { background: var(--a-head-bg); }
+.si-table th:first-child, .si-table td:first-child { padding-left: 14px; }
+.si-table th:last-child, .si-table td:last-child { padding-right: 14px; }
+.si-table td { padding: 8px; }
+.si-remove { color: var(--tone-red-fg); border-color: var(--a-line); }
+.stock-tag { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: var(--r-xs); background: var(--a-bg); color: var(--ink); }
+.stock-tag--low { background: var(--tone-amber-bg); color: var(--tone-amber-fg); }
+.stock-tag--out { background: var(--tone-red-bg); color: var(--tone-red-fg); }
+
+/* Totals */
+.si-totals { font-variant-numeric: tabular-nums; }
+.si-kv-input { align-items: center; }
+.si-amount { width: 120px; height: 38px; flex-shrink: 0; }
+.si-amount input { text-align: right; }
+.si-grand { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--a-line); padding-top: 10px; }
+.si-grand__value { font-family: var(--font-head); font-size: 24px; font-weight: 700; }

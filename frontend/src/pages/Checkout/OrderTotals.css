@@ -1,0 +1,63 @@
+/* ---------- Order totals (summary rows + total) ---------- */
+.order-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  font-size: var(--fs-base);
+  font-variant-numeric: tabular-nums;
+}
+
+.order-totals__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.order-totals dt {
+  color: var(--muted);
+}
+
+.order-totals dd {
+  margin: 0;
+  text-align: right;
+}
+
+.order-totals__value--sale {
+  color: var(--sale);
+}
+
+.order-totals__value--brand {
+  color: var(--brand);
+}
+
+.order-totals__value--free {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.order-totals dd.order-totals__note {
+  flex-basis: 100%;
+  margin-top: -2px;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  text-align: left;
+}
+
+.order-totals__row--total {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.order-totals__row--total dt {
+  color: var(--ink);
+}
+
+@media (max-width: 768px) {
+  .order-totals__row--total {
+    font-size: 19px;
+  }
+}

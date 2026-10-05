@@ -1,0 +1,203 @@
+/* ==========================================================================
+   === Order print documents ===  (Invoice.dc.html)
+   A4 invoice (.doc-a4), 80 mm POS receipt (.doc-receipt), packing slip (.doc-slip).
+   Used with admin.layouts.print by admin/orders/{invoice,receipt,packing-slip}.blade.php.
+   ========================================================================== */
+
+/* ---- Shared ---- */
+.print-body { --doc-muted: #4B525C; }
+.doc-muted { color: var(--doc-muted); }
+.doc-mono { font-family: var(--font-mono); font-size: 12px; }
+.doc-mono--sm { font-size: 11px; }
+.doc-label {
+  font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--doc-muted); margin-bottom: 4px;
+}
+.doc-label--sm { font-size: 10px; margin-bottom: 0; }
+.doc-label--ink { color: var(--ink); }
+
+/* Toolbar: switch between the three documents */
+.doc-switch { display: flex; flex-wrap: wrap; gap: 4px; margin-right: 8px; }
+.doc-switch__link {
+  display: inline-flex; align-items: center; height: 36px; padding: 0 12px; border-radius: var(--r-sm);
+  font-size: 13px; font-weight: 600; color: var(--a-text-2);
+}
+.doc-switch__link:hover { background: var(--a-bg); color: var(--ink); }
+.doc-switch__link.is-active { background: var(--brand-tint); color: var(--brand); font-weight: 700; }
+
+/* Barcode strip (design ".bc") */
+.doc-barcode { display: flex; flex-direction: column; gap: 4px; }
+.doc-barcode__bars {
+  width: 220px; height: 48px; max-width: 100%;
+  background: repeating-linear-gradient(90deg,
+    var(--ink) 0 2px, transparent 2px 3px, var(--ink) 3px 4px, transparent 4px 7px,
+    var(--ink) 7px 10px, transparent 10px 11px, var(--ink) 11px 12px, transparent 12px 14px,
+    var(--ink) 14px 17px, transparent 17px 18px, var(--ink) 18px 19px, transparent 19px 22px);
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.doc-barcode__value { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.3em; }
+.doc-barcode--md { align-items: center; }
+.doc-barcode--md .doc-barcode__bars { width: 200px; height: 40px; }
+.doc-barcode--md .doc-barcode__value { font-size: 12px; }
+.doc-barcode--sm { align-items: flex-end; }
+.doc-barcode--sm .doc-barcode__bars { width: 150px; height: 34px; }
+.doc-barcode--sm .doc-barcode__value { font-size: 11px; letter-spacing: 0.2em; }
+
+/* ==========================================================================
+   A4 invoice
+   ========================================================================== */
+.print-sheet.doc-a4 {
+  max-width: 794px; padding: 48px 52px 40px; border-radius: 0; border: 0;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.08), 0 8px 24px rgba(16, 24, 40, 0.08);
+  display: flex; flex-direction: column; gap: 28px; font-size: 13px; line-height: 1.5;
+}
+@media (min-width: 840px) { .print-sheet.doc-a4 { min-height: 1123px; } } /* 210 × 297 mm at 96 dpi */
+
+.doc-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.doc-seller { display: flex; gap: 14px; align-items: flex-start; }
+.doc-logo {
+  width: 56px; height: 56px; flex-shrink: 0; border-radius: var(--r-md); background: var(--brand); color: #FFFFFF;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-weight: 800; font-size: 20px; letter-spacing: 0.02em;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.doc-seller__name { font-family: var(--font-head); font-weight: 800; font-size: 22px; letter-spacing: 0.03em; }
+.doc-head__right { text-align: right; }
+.doc-title { font-family: var(--font-head); font-weight: 800; font-size: 30px; letter-spacing: 0.06em; }
+.doc-meta {
+  display: grid; grid-template-columns: auto auto; gap: 2px 14px; justify-content: end;
+  margin: 6px 0 0; font-variant-numeric: tabular-nums;
+}
+.doc-meta dt { color: var(--doc-muted); }
+.doc-meta dd { margin: 0; }
+
+.doc-parties { display: flex; flex-wrap: wrap; gap: 16px; }
+.doc-box { flex: 1 1 200px; border: 1px solid var(--a-line); border-radius: var(--r); padding: 14px 16px; }
+.doc-box--narrow { flex-basis: 160px; }
+
+.doc-table-wrap { overflow-x: auto; }
+.doc-table { width: 100%; min-width: 520px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.doc-table th {
+  text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--doc-muted); padding: 8px 6px; border-bottom: 1.5px solid var(--ink);
+}
+.doc-table td { padding: 12px 6px; border-bottom: 1px solid var(--a-line); vertical-align: top; }
+.doc-table th:first-child, .doc-table td:first-child { padding-left: 0; }
+.doc-table th:last-child, .doc-table td:last-child { padding-right: 0; }
+.doc-table .num { text-align: right; }
+.doc-table__n { width: 24px; }
+
+.doc-summary { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.doc-summary__code { display: flex; flex-direction: column; gap: 6px; }
+.doc-summary__code .doc-label { margin-bottom: 0; }
+.doc-totals { flex: 0 1 300px; display: flex; flex-direction: column; gap: 6px; font-variant-numeric: tabular-nums; }
+.doc-totals__row { display: flex; justify-content: space-between; gap: 12px; }
+.doc-totals__grand {
+  display: flex; justify-content: space-between; font-family: var(--font-head); font-size: 18px; font-weight: 800;
+  border-top: 1.5px solid var(--ink); padding-top: 8px; margin-top: 2px;
+}
+.doc-totals__due {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  border: 1.5px solid var(--ink); border-radius: var(--r-sm); padding: 8px 10px; margin-top: 4px;
+  font-weight: 800; font-size: 15px;
+}
+
+.doc-foot { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+.doc-policy {
+  display: flex; gap: 12px; align-items: center; background: #F1F6F3; border-radius: var(--r); padding: 12px 14px; color: var(--a-text-2);
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.doc-policy__icon { color: var(--brand); }
+.doc-policy__title { font-weight: 800; color: var(--brand); font-size: 14px; }
+.doc-foot__line {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+  color: var(--doc-muted); font-size: 12px; border-top: 1px solid var(--a-line); padding-top: 10px;
+}
+
+@media (max-width: 639.98px) {
+  .print-sheet.doc-a4 { padding: 24px 16px; gap: 20px; }
+  .doc-head__right { text-align: left; }
+  .doc-meta { justify-content: start; }
+  .doc-totals { flex-basis: 100%; }
+}
+
+/* ==========================================================================
+   80 mm POS receipt
+   ========================================================================== */
+.print-sheet.doc-receipt {
+  max-width: 300px; padding: 18px 16px 22px; border: 0; border-radius: 0;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.08), 0 8px 24px rgba(16, 24, 40, 0.08);
+  font-family: var(--font-mono); font-size: 12px; line-height: 1.45; font-variant-numeric: tabular-nums;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.rc-center { text-align: center; }
+.rc-brand { font-family: var(--font-head); font-weight: 800; font-size: 20px; letter-spacing: 0.06em; }
+.rc-rule { width: 100%; margin: 0; border: 0; border-top: 1px dashed var(--ink); }
+.rc-rows { margin: 0; display: flex; flex-direction: column; gap: 1px; }
+.rc-row { display: flex; justify-content: space-between; gap: 8px; }
+.rc-row dt, .rc-row dd { margin: 0; }
+.rc-row dd { text-align: right; }
+.rc-note { font-size: 11px; }
+.rc-items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.rc-total {
+  display: flex; justify-content: space-between; font-weight: 800; font-size: 16px;
+  border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 6px 0;
+}
+.rc-thanks { display: flex; flex-direction: column; gap: 2px; }
+.rc-thanks__title { font-weight: 800; font-size: 14px; }
+.doc-receipt .doc-barcode__value { letter-spacing: 0.3em; font-size: 12px; }
+
+/* ==========================================================================
+   Packing slip (A6)
+   ========================================================================== */
+.print-sheet.doc-slip {
+  max-width: 420px; padding: 22px 24px; border: 0; border-radius: 0;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.08), 0 8px 24px rgba(16, 24, 40, 0.08);
+  font-size: 12px; line-height: 1.45; display: flex; flex-direction: column; gap: 14px;
+}
+.slip-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.slip-title { font-family: var(--font-head); font-weight: 800; font-size: 16px; letter-spacing: 0.04em; }
+.slip-ship { display: flex; flex-wrap: wrap; gap: 12px; }
+.slip-ship__to { flex: 1 1 180px; }
+.slip-ship__name { font-weight: 800; font-size: 14px; }
+.slip-collect {
+  flex: 0 1 130px; align-self: flex-start; text-align: center;
+  border: 2px solid var(--ink); border-radius: var(--r-sm); padding: 8px 10px;
+}
+.slip-collect__amount { font-family: var(--font-head); font-weight: 800; font-size: 20px; }
+.slip-meta {
+  display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--a-text-2);
+  border-top: 1px solid var(--a-line); border-bottom: 1px solid var(--a-line); padding: 8px 0;
+}
+.slip-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.slip-table th {
+  text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--doc-muted); padding: 4px 4px 6px;
+}
+.slip-table td { padding: 8px 4px; border-top: 1px solid var(--a-line); vertical-align: top; }
+.slip-table th:first-child, .slip-table td:first-child { padding-left: 0; }
+.slip-table th:last-child, .slip-table td:last-child { padding-right: 0; }
+.slip-table .num { text-align: right; }
+.slip-table__check { width: 18px; }
+.slip-table__qty { font-weight: 800; font-size: 14px; }
+.slip-box { display: block; width: 12px; height: 12px; margin-top: 2px; border: 1.5px solid var(--ink); border-radius: 2px; }
+.slip-total { display: flex; justify-content: space-between; font-weight: 700; }
+.slip-note { background: var(--a-bg); border-radius: var(--r-xs); padding: 8px 10px; color: var(--a-text-2); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.slip-sign { display: flex; gap: 16px; padding-top: 10px; }
+.slip-sign > div { flex: 1; border-top: 1px solid var(--ink); padding-top: 4px; color: var(--doc-muted); }
+.slip-foot { text-align: center; color: var(--doc-muted); font-size: 11px; }
+
+/* ==========================================================================
+   Print: page size per document (named pages)
+   ========================================================================== */
+@page invoice { size: A4; margin: 12mm; }
+@page receipt { margin: 3mm; }
+@page slip { size: A6; margin: 6mm; }
+@media print {
+  .print-sheet.doc-a4 { page: invoice; min-height: 0; box-shadow: none; padding: 0; }
+  .print-sheet.doc-receipt { page: receipt; width: 72mm; max-width: 72mm; box-shadow: none; padding: 0; }
+  .print-sheet.doc-slip { page: slip; max-width: none; box-shadow: none; padding: 0; }
+  .doc-table-wrap { overflow: visible; }
+  .doc-table { min-width: 0; }
+  .doc-table tr, .rc-items li, .slip-table tr { break-inside: avoid; }
+}

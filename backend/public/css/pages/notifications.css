@@ -1,0 +1,88 @@
+/* === SMS & email notifications (Notifications.dc.html) ===
+   Loaded only by resources/views/admin/notifications/index.blade.php.
+   Builds on the shared classes in /css/admin.css. */
+
+.nt { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.nt-section { scroll-margin-top: calc(var(--topbar-h) + 16px); }
+
+/* Jump tabs: brand-coloured active tab with a 3px underline */
+.nt-tabs .tab { height: 44px; padding: 0 16px; color: var(--a-text-2); border-bottom-width: 3px; }
+.nt-tabs .tab:hover { color: var(--ink); }
+.nt-tabs .tab[aria-current="true"] { color: var(--brand); font-weight: 700; border-bottom-color: var(--brand); }
+.nt-pill { padding: 0 14px; }
+.nt-pill[aria-current="true"] { background: var(--ink); border-color: var(--ink); color: #FFFFFF; font-weight: 700; }
+
+/* Status cards */
+.nt-stats { --min: 260px; }
+.nt-stat { gap: 8px; }
+.nt-stat__head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.nt-stat__host { font-size: 22px; overflow-wrap: anywhere; }
+.nt-stat__foot { margin-top: 4px; }
+.nt-unit { font-family: var(--font-body); font-size: 15px; font-weight: 600; color: var(--a-muted); }
+.nt-failed { color: var(--tone-red-fg); }
+.nt-warn { color: var(--tone-amber-fg); }
+.nt-meter { height: 8px; background: var(--chart-track); border-radius: 4px; overflow: hidden; }
+.nt-meter__fill { height: 100%; background: var(--brand); border-radius: 4px; }
+
+/* Event × channel matrix: the event column is a row header, not a caps label */
+.nt-matrix th.nt-matrix__event {
+  text-transform: none; letter-spacing: 0; white-space: normal;
+  font-size: 14px; font-weight: 400; color: var(--ink); padding: 10px 8px;
+}
+.nt-matrix__name { display: block; font-weight: 600; }
+.nt-matrix td { padding-top: 10px; padding-bottom: 10px; }
+.nt-matrix .switch { vertical-align: middle; display: inline-block; }
+
+/* Template editor */
+.nt-lang { background: var(--a-bg); }
+.nt-lang .segmented__btn { height: 36px; font-weight: 600; }
+.nt-ph {
+  height: 34px; padding: 0 12px; border-radius: var(--r-pill);
+  border: 1px solid #B9D3C5; background: var(--brand-tint); color: var(--brand);
+  font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+}
+.nt-ph:hover { background: var(--brand-soft); border-color: var(--brand); }
+.nt-textarea { border-radius: var(--r); padding: 12px; font-size: 15px; line-height: 1.5; }
+.nt-counter {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px;
+  font-size: 13px; color: var(--a-text-2); font-variant-numeric: tabular-nums;
+}
+.nt-reset { height: 30px; padding: 0 10px; border-radius: var(--r-sm); font-size: 12px; }
+.nt-tip { border-radius: var(--r-sm); padding: 8px 10px; }
+
+/* Preview phone */
+.nt-phone { background: #EEF0F2; border-radius: 22px; padding: 18px 14px; display: flex; flex-direction: column; gap: 8px; }
+.nt-phone__from { text-align: center; font-size: 12px; font-weight: 600; color: var(--a-muted); }
+.nt-bubble {
+  align-self: flex-start; max-width: 92%;
+  background: #FFFFFF; border-radius: 16px 16px 16px 4px; padding: 12px 14px;
+  font-size: 14px; line-height: 1.5; color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.nt-phone__time { font-size: 11px; color: var(--a-muted); padding-left: 4px; }
+.nt-sample { line-height: 1.5; }
+.nt-test .input { flex: 1 1 140px; width: auto; }
+
+/* Gateway / SMTP forms */
+.nt-half { flex: 1 1 420px; min-width: 0; }
+.nt-inline { display: flex; gap: 8px; }
+.nt-inline .input { flex: 1; }
+.nt-form-foot {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end;
+  border-top: 1px dashed var(--a-input-line); padding-top: 12px;
+}
+.nt-grow { flex: 1 1 180px; }
+
+/* Log */
+.nt-log-head { align-items: center; margin-bottom: 12px; }
+.nt-filter { width: auto; }
+.nt-export { height: 40px; }
+
+@media (max-width: 639.98px) {
+  .nt { gap: 16px; }
+  .nt-half { flex-basis: 100%; }
+  .nt-form-foot > .btn { flex: 1 1 auto; }
+  .nt-log-head .cluster { width: 100%; }
+  .nt-filter { flex: 1 1 140px; }
+  .nt-pill { min-height: 44px; }
+}

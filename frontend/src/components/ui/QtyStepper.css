@@ -1,0 +1,53 @@
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.qty-stepper__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink);
+}
+
+.qty-stepper__btn:hover:not(:disabled) {
+  background: var(--soft);
+}
+
+.qty-stepper__btn:disabled {
+  color: var(--disabled);
+}
+
+.qty-stepper__value {
+  min-width: 32px;
+  text-align: center;
+  font-weight: 700;
+  font-size: var(--fs-md);
+}
+
+.qty-stepper--sm .qty-stepper__btn {
+  width: 40px;
+  height: 40px;
+}
+
+.qty-stepper--sm .qty-stepper__value {
+  min-width: 28px;
+  font-size: var(--fs-base);
+}
+
+@media (max-width: 768px) {
+  .qty-stepper--sm .qty-stepper__btn {
+    width: 44px;
+    height: 44px;
+  }
+}

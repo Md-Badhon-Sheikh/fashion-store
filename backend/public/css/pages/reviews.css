@@ -1,0 +1,105 @@
+/* ==========================================================================
+   === Reviews ===  (Reviews.dc.html)
+   Loaded only by admin/reviews/index.blade.php. Uses tokens from admin.css.
+   ========================================================================== */
+.rv { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+
+.rv-auto {
+  display: inline-flex; gap: 10px; align-items: center; height: 44px; padding: 0 14px;
+  border: 1px solid var(--a-line); border-radius: var(--r); background: #FFFFFF;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+}
+
+/* Stars */
+.rv-avg { display: flex; gap: 8px; align-items: center; }
+.rv-stars { display: inline-flex; gap: 2px; }
+.rv-star { fill: var(--a-line); }
+.rv-star.is-on { fill: var(--a-accent); }
+.rv-star.is-part { fill: #F2D9A6; }
+
+/* Pending count badge stays amber when its tab is not selected */
+.rv-count--pending { background: var(--tone-amber-bg); color: var(--tone-amber-fg); }
+
+.rv-filters__check { height: 40px; min-height: 40px; font-weight: 500; }
+.rv-filters .input-group { height: 40px; }
+
+.rv-flash {
+  display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center;
+  background: var(--brand-tint); border: 1px solid #DCE8E1; color: var(--brand-dark);
+  border-radius: var(--r); padding: 10px 14px; font-size: 14px; font-weight: 600;
+}
+
+/* Cards */
+.rv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr)); gap: 14px; align-items: start; }
+.rv-card {
+  background: var(--a-card); border: 1px solid var(--a-line); border-radius: var(--r-lg);
+  padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0;
+}
+.rv-card.is-replying { border-color: var(--brand); }
+.rv-card__head { display: flex; gap: 12px; align-items: flex-start; }
+.rv-card__thumb { width: 48px; height: 64px; }
+.rv-card__product { flex: 1; min-width: 0; }
+.rv-card__name { font-weight: 700; font-size: 15px; color: var(--ink); }
+.rv-card__name:hover { color: var(--brand); text-decoration: underline; }
+.rv-card__meta { font-size: 13px; color: var(--a-muted); }
+.rv-card__info { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.rv-verified { gap: 4px; }
+.rv-card__text { font-size: 14px; line-height: 1.55; color: #262A31; }
+.rv-card__hidden { font-size: 13px; color: var(--tone-gray-fg); background: var(--tone-gray-bg); border-radius: var(--r-sm); padding: 8px 10px; }
+
+.rv-photos { display: flex; gap: 8px; }
+.rv-photo {
+  width: 64px; height: 64px; border-radius: var(--r-sm); border: 1px solid var(--a-line);
+  background: var(--tone, #E2DED6); font-size: 10px; color: #4A4238;
+  display: flex; align-items: flex-end; padding: 5px; cursor: zoom-in;
+}
+.rv-photo:hover { border-color: var(--brand); }
+
+.rv-reply {
+  border-left: 3px solid var(--brand); background: #F4F8F6; border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  padding: 10px 12px; font-size: 13px; line-height: 1.5;
+}
+.rv-reply .fw-700 { margin-bottom: 2px; }
+
+.rv-card__actions { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--a-line-soft); padding-top: 12px; }
+.rv-card__actions .btn--sm { height: 38px; padding: 0 14px; }
+.rv-reply-btn[aria-expanded="true"] { background: #EEF4F1; }
+.rv-delete {
+  margin-left: auto; height: 38px; padding: 0 12px; border: 0; border-radius: var(--r-sm); background: transparent;
+  color: var(--sale); font-size: 13px; font-weight: 700; display: inline-flex; gap: 6px; align-items: center;
+}
+.rv-delete:hover { background: #FEF3F2; }
+
+.rv-reply-form {
+  display: flex; flex-direction: column; gap: 8px;
+  background: var(--a-row-selected); border: 1px solid #DCE8E1; border-radius: var(--r); padding: 12px;
+}
+.rv-reply-form .textarea { font-size: 14px; line-height: 1.5; }
+.rv-reply-form__foot { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.rv-reply-form__sms { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; min-height: 38px; cursor: pointer; }
+.rv-reply-form__sms .checkbox { width: 16px; height: 16px; }
+
+.rv-empty {
+  background: #FFFFFF; border: 1px dashed var(--a-input-line); border-radius: var(--r-lg);
+  padding: 32px 16px; text-align: center; color: var(--a-muted); font-size: 14px;
+}
+.rv-showing { font-size: 14px; color: var(--a-muted); }
+
+/* Photo preview */
+.rv-lightbox { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.rv-lightbox__backdrop { position: absolute; inset: 0; background: var(--a-overlay); }
+.rv-lightbox__box {
+  position: relative; width: 100%; max-width: 480px; background: #FFFFFF; border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg); padding: 12px 12px 16px 18px; display: flex; flex-direction: column; gap: 10px;
+}
+.rv-lightbox__img {
+  aspect-ratio: 4 / 5; border-radius: var(--r); background: var(--tone, #E2DED6);
+  display: flex; align-items: flex-end; padding: 12px; font-size: 13px; color: #4A4238; margin-right: 6px;
+}
+
+@media (max-width: 639.98px) {
+  .rv-auto { height: auto; min-height: 44px; padding: 8px 12px; }
+  .rv-filters > .field, .rv-filters > .field--wide { flex-basis: 100%; }
+  .rv-card { padding: 14px; }
+  .rv-card__actions .btn--sm, .rv-delete { min-height: 44px; }
+}

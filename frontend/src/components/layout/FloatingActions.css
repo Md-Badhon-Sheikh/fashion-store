@@ -1,0 +1,115 @@
+.floating-cart {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-float);
+  width: 88px;
+  overflow: hidden;
+  border-radius: var(--r-md) 0 0 var(--r-md);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.floating-cart__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px 12px;
+  background: var(--brand);
+  color: #fff;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.floating-cart__total {
+  display: block;
+  padding: 10px 6px;
+  background: #fff;
+  color: var(--brand);
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.floating-cart:hover .floating-cart__top {
+  background: var(--brand-dark);
+}
+
+.floating-actions__stack {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: var(--z-float);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.floating-actions__top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--brand);
+  color: #fff;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 4px var(--brand);
+}
+
+.floating-actions__chat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px 999px 999px 8px;
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(22, 24, 29, 0.22);
+}
+
+.floating-actions__top:hover,
+.floating-actions__chat:hover {
+  background: var(--brand-dark);
+}
+
+.floating-chat {
+  position: absolute;
+  right: 72px;
+  bottom: 0;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: #fff;
+  box-shadow: var(--shadow-md);
+}
+
+.floating-chat__title {
+  font-weight: 700;
+}
+
+.floating-chat__text {
+  margin-bottom: 4px;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .floating-actions {
+    display: none;
+  }
+}

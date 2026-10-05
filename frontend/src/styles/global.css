@@ -1,0 +1,722 @@
+/* ==========================================================================
+   Global styles: reset, typography, layout helpers, buttons, form controls,
+   chips, badges, utilities. Component/page styles live next to each component.
+   ========================================================================== */
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-head);
+  line-height: 1.15;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--brand);
+}
+
+table {
+  border-collapse: collapse;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--brand-tint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: 24px;
+}
+
+/* Keep #hash targets clear of the sticky phone header */
+@media (max-width: 900px) {
+  [id] {
+    scroll-margin-top: calc(var(--header-h-mobile) + 12px);
+  }
+}
+
+/* ---------- Typography helpers ---------- */
+.h1 {
+  font-family: var(--font-head);
+  font-size: var(--fs-h1);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.h2 {
+  font-family: var(--font-head);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+}
+
+.h3 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.eyebrow {
+  font-size: var(--fs-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.text-sale {
+  color: var(--sale);
+}
+
+.text-brand {
+  color: var(--brand);
+}
+
+.link-arrow {
+  font-weight: 600;
+  font-size: var(--fs-base);
+}
+
+.link-underline {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Buttons ----------
+   .btn                base (pill, 44px min height)
+   .btn--primary       ink background (dark)
+   .btn--brand         brand green background
+   .btn--outline       ink outline
+   .btn--light         white background (on dark/brand surfaces)
+   .btn--outline-light white outline (on dark/brand surfaces)
+   .btn--sale          sale red outline (sold out states)
+   .btn--caps          small uppercase "BUY NOW" style, 6px radius
+   .btn--sm / .btn--lg sizes, .btn--block full width
+*/
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 24px;
+  border: 1.5px solid transparent;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.5;
+}
+
+.btn--primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: #000;
+  color: #fff;
+}
+
+.btn--brand {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+
+.btn--brand:hover {
+  background: var(--brand-dark);
+  border-color: var(--brand-dark);
+  color: #fff;
+}
+
+.btn--outline {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: #fff;
+}
+
+.btn--outline:hover {
+  background: var(--soft);
+  color: var(--ink);
+}
+
+.btn--light {
+  background: #fff;
+  border-color: #fff;
+  color: var(--ink);
+}
+
+.btn--light:hover {
+  background: var(--soft);
+  color: var(--ink);
+}
+
+.btn--outline-light {
+  border-color: #fff;
+  color: #fff;
+}
+
+.btn--outline-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.btn--sale {
+  border: 1px solid var(--sale-border);
+  background: #fff;
+  color: var(--sale);
+}
+
+.btn--caps {
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: var(--r-xs);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.btn--sm {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.btn--lg {
+  min-height: 50px;
+  padding: 0 28px;
+}
+
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+/* Square icon button (44×44 touch target) */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  color: var(--brand);
+}
+
+.count-badge {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+.count-badge--brand {
+  background: var(--brand);
+}
+
+/* ---------- Chips (filter pills / toggles) ----------
+   <button class="chip" aria-pressed="true|false">  — selected state follows aria-pressed
+   or add .chip--active for links. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: #fff;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.chip[aria-pressed='true'],
+.chip[aria-selected='true'],
+.chip--active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+  font-weight: 600;
+}
+
+.chip--sm {
+  min-height: 40px;
+}
+
+/* Removable filter chip */
+.chip--removable {
+  min-height: 36px;
+  padding: 0 8px 0 14px;
+  background: var(--soft);
+  font-weight: 600;
+}
+
+/* ---------- Badges (on product images, labels) ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: #fff;
+  color: var(--ink);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.badge--sale {
+  background: var(--sale);
+  color: #fff;
+  border-radius: var(--r-xs);
+  padding: 4px 8px;
+}
+
+.badge--dark {
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--r-xs);
+  padding: 4px 8px;
+}
+
+.badge--oos {
+  background: var(--st-danger-bg);
+  color: var(--st-danger-fg);
+}
+
+.badge--success {
+  background: var(--st-success-bg);
+  color: var(--st-success-fg);
+}
+
+/* ---------- Status chips (orders etc.) ----------
+   <span class="status-chip status-chip--shipped">Shipped</span> */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--st-neutral-bg);
+  color: var(--st-neutral-fg);
+}
+
+.status-chip--pending,
+.status-chip--low-stock {
+  background: var(--st-pending-bg);
+  color: var(--st-pending-fg);
+}
+
+.status-chip--confirmed,
+.status-chip--scheduled {
+  background: var(--st-confirmed-bg);
+  color: var(--st-confirmed-fg);
+}
+
+.status-chip--processing {
+  background: var(--st-processing-bg);
+  color: var(--st-processing-fg);
+}
+
+.status-chip--shipped {
+  background: var(--st-shipped-bg);
+  color: var(--st-shipped-fg);
+}
+
+.status-chip--delivered,
+.status-chip--completed,
+.status-chip--active,
+.status-chip--available {
+  background: var(--st-success-bg);
+  color: var(--st-success-fg);
+}
+
+.status-chip--cancelled,
+.status-chip--out-of-stock,
+.status-chip--failed {
+  background: var(--st-danger-bg);
+  color: var(--st-danger-fg);
+}
+
+.status-chip--returned,
+.status-chip--draft,
+.status-chip--inactive {
+  background: var(--st-neutral-bg);
+  color: var(--st-neutral-fg);
+}
+
+/* ---------- Prices ---------- */
+.price {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.price__now {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.price--sale .price__now {
+  color: var(--sale);
+}
+
+.price__old {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+/* ---------- Form controls ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.hint {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+.error-text {
+  font-size: var(--fs-sm);
+  color: var(--sale);
+  font-weight: 600;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: #fff;
+  color: var(--ink);
+  font-size: var(--fs-base);
+}
+
+.textarea {
+  padding: 12px 14px;
+  min-height: 96px;
+  resize: vertical;
+}
+
+.select {
+  appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2316181D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--muted-2);
+}
+
+.input:focus-visible,
+.select:focus-visible,
+.textarea:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 0;
+  border-color: var(--brand);
+}
+
+.input[aria-invalid='true'] {
+  border-color: var(--sale);
+}
+
+.checkbox,
+.radio {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--brand);
+  flex-shrink: 0;
+}
+
+/* Pill search field (header / mobile home) */
+.search-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--soft);
+  color: var(--muted);
+}
+
+.search-pill:focus-within {
+  border-color: var(--brand);
+  outline: 2px solid var(--brand);
+  outline-offset: 0;
+}
+
+.search-pill input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.search-pill input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+/* ---------- Media placeholder (photo with tone fallback) ---------- */
+.media {
+  position: relative;
+  overflow: hidden;
+  background: var(--soft);
+}
+
+.media > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Colour swatch dot ---------- */
+.swatch {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--r-pill);
+  box-shadow: 0 0 0 1px var(--line-strong);
+  flex-shrink: 0;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+}
+
+/* ---------- Utilities ---------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 200;
+  padding: 10px 16px;
+  border-radius: var(--r-sm);
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 12px;
+  color: #fff;
+}
+
+/* Horizontal scroller with hidden scrollbar + snap */
+.h-scroll {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.h-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.h-scroll > * {
+  scroll-snap-align: start;
+}
+
+/* Visibility helpers around the 768px phone breakpoint */
+@media (min-width: 769px) {
+  .only-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .only-desktop {
+    display: none !important;
+  }
+}

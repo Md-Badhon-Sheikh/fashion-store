@@ -1,0 +1,126 @@
+/* === Settings (Settings.dc.html) ===
+   Loaded only by resources/views/admin/settings/index.blade.php.
+   Builds on the shared classes in /css/admin.css (.side-nav, .card, .switch-row, .segmented …). */
+
+.st { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+
+/* Layout: sticky section nav + content column */
+.st-layout { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 20px; align-items: start; }
+.st-nav { position: sticky; top: calc(var(--topbar-h) + 16px); }
+.st-nav .side-nav__link { color: var(--a-text-2); }
+.st-nav .side-nav__link[aria-current="true"] { color: var(--brand); }
+.st-main { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.st-section { scroll-margin-top: calc(var(--topbar-h) + 16px); }
+.st-btn-md { height: 40px; }
+.st-mono { font-family: var(--font-mono); }
+.st-narrow { max-width: 320px; }
+.st-rows { display: flex; flex-direction: column; }
+
+/* Store info */
+.st-store { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start; }
+.st-logo { flex: 0 0 140px; display: flex; flex-direction: column; gap: 8px; }
+.st-logo__box { width: 140px; height: 140px; padding: 8px; }
+.st-logo__btn { cursor: pointer; }
+.st-logo__btn:has(+ input:focus-visible) { outline: 2px solid var(--brand); outline-offset: 2px; }
+.st-store__fields { flex: 1 1 320px; min-width: 0; }
+
+/* Shipping: free delivery bar */
+.st-free {
+  display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between;
+  background: var(--a-bg); border-radius: var(--r); padding: 12px 14px;
+}
+.st-free__switch { display: flex; gap: 12px; align-items: center; }
+.st-free__switch .switch-field { min-height: 0; }
+.st-free__amount { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.st-free__input { width: 110px; }
+
+/* Payment methods */
+.st-pay {
+  display: flex; justify-content: space-between; align-items: center; gap: 14px;
+  padding: 10px 0; border-top: 1px solid var(--a-line-soft);
+}
+.st-pay__main { display: flex; gap: 12px; align-items: center; min-width: 0; }
+.st-pay__where { width: 56px; flex-shrink: 0; }
+.st-pay__text { min-width: 0; }
+.st-pay__name { font-size: 14px; font-weight: 600; }
+.st-pay__side { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+.st-pay__side .switch-field, .st-row .switch-field { min-height: 0; }
+.st-pay .switch[aria-disabled="true"] { background: var(--a-input-line); opacity: 1; }
+.st-merchant { margin-top: 14px; }
+.st-merchant .input { max-width: 320px; }
+
+/* Courier */
+.st-note { margin: 0; }
+.st-couriers { --min: 220px; --gap: 12px; }
+.st-courier {
+  border: 1px dashed #C9CED4; border-radius: var(--r-md); background: #FAFBFA;
+  padding: 14px; display: flex; flex-direction: column; gap: 10px;
+}
+.st-courier__chip { font-size: 11px; padding: 2px 8px; }
+.st-disabled:disabled { background: var(--a-line-soft); color: var(--a-muted); cursor: not-allowed; }
+
+/* Invoice & receipt */
+.st-invoice { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+.st-invoice__form { flex: 2 1 340px; min-width: 0; }
+.st-paper { align-self: flex-start; background: var(--a-bg); }
+.st-paper .segmented__btn { padding: 0 18px; font-weight: 600; }
+.st-row { padding: 6px 0; }
+.st-row--note { padding: 8px 0; }
+.st-preview {
+  flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 8px; align-items: center;
+  background: var(--a-bg); border-radius: var(--r-md); padding: 16px;
+}
+.st-preview__label { font-size: 12px; font-weight: 700; color: var(--a-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.st-receipt {
+  width: 240px; max-width: 100%; background: #FFFFFF; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 14px 12px; font-family: var(--font-mono); font-size: 11px; line-height: 1.5; color: var(--ink);
+  transition: width .2s ease;
+}
+.st-receipt--58 { width: 176px; }
+.st-receipt__brand { text-align: center; font-family: var(--font-head); font-weight: 800; font-size: 14px; }
+.st-receipt__center { text-align: center; color: var(--a-text-2); }
+.st-receipt__rule { border-top: 1px dashed #8A939D; margin: 6px 0; }
+.st-receipt__line { display: flex; justify-content: space-between; gap: 6px; }
+
+/* Security & backup */
+.st-backup {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+  border: 1px solid var(--a-line); border-radius: var(--r-md); padding: 14px 16px; background: #F8FAF9;
+}
+.st-backup__info { display: flex; gap: 12px; align-items: center; min-width: 0; }
+.st-backup__icon { color: var(--brand); }
+.st-backup__chip { margin-left: 6px; vertical-align: middle; }
+
+@media (prefers-reduced-motion: reduce) { .st-receipt { transition: none; } }
+
+/* Tablets/phones: section nav becomes a sticky scrolling pill row */
+@media (max-width: 767.98px) {
+  .st { gap: 16px; }
+  .st-layout { display: block; }
+  .st-nav {
+    position: sticky; top: var(--topbar-h); z-index: 20;
+    flex-direction: row; gap: 8px; overflow-x: auto; scrollbar-width: none;
+    margin: 0 calc(var(--content-pad-x) * -1) 16px; padding: 10px var(--content-pad-x);
+    border: 0; border-bottom: 1px solid var(--a-line); border-radius: 0; background: var(--a-bg);
+  }
+  .st-nav::-webkit-scrollbar { display: none; }
+  .st-nav .side-nav__link {
+    flex-shrink: 0; min-height: 40px; padding: 0 14px; white-space: nowrap;
+    border: 1px solid var(--a-line); border-radius: var(--r-pill); background: #FFFFFF;
+  }
+  .st-nav .side-nav__link::before { display: none; }
+  .st-nav .side-nav__link[aria-current="true"] { background: var(--ink); border-color: var(--ink); color: #FFFFFF; }
+  .st-main { gap: 16px; }
+  .st-section { scroll-margin-top: calc(var(--topbar-h) + 76px); }
+}
+@media (max-width: 639.98px) {
+  .st-nav { top: 60px; }
+  .st-nav .side-nav__link { min-height: 44px; }
+  .st-section { scroll-margin-top: 136px; }
+  .st-logo { flex-basis: 100%; flex-direction: row; align-items: center; gap: 14px; }
+  .st-logo__box { width: 104px; height: 104px; }
+  .st-narrow, .st-merchant .input { max-width: none; }
+  .st-pay { align-items: flex-start; }
+  .st-backup .cluster { width: 100%; }
+  .st-backup .cluster .btn { flex: 1 1 auto; }
+}

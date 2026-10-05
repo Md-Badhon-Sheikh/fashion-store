@@ -1,0 +1,75 @@
+/* ==========================================================================
+   Barcode labels (Barcodes.dc.html). Needs catalog-kit.css.
+   ========================================================================== */
+
+.bc-cols { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+.bc-left { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.bc-right { flex: 1.4 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.bc-left .card, .bc-right .card { padding: 18px; }
+
+/* Queue */
+.bc-queue { list-style: none; display: flex; flex-direction: column; }
+.bc-queue__row { display: flex; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--a-line-soft); }
+.bc-queue__text { flex: 1; min-width: 0; }
+.bc-queue__empty { padding: 16px 0; border-top: 1px solid var(--a-line-soft); font-size: 13px; color: var(--a-muted); text-align: center; }
+
+/* Preview stage + sheet */
+.bc-stage { background: #E9ECEA; border-radius: var(--r-md); padding: 18px; overflow-x: auto; }
+.label-sheet {
+  --lw: 152px; --lh: 100px; --lpad: 6px 7px; --fs-store: 7px; --fs-name: 10px; --fs-var: 9px; --fs-price: 12px; --bc-h: 24px; --fs-code: 8px;
+  margin: 0 auto; max-width: 720px; background: #FFFFFF; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  padding: 18px 14px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+}
+.label-sheet--large { --lw: 200px; --lh: 120px; --lpad: 8px 10px; --fs-store: 9px; --fs-name: 12px; --fs-var: 11px; --fs-price: 15px; --bc-h: 32px; --fs-code: 10px; }
+.label-sheet--thermal { max-width: 336px; background: #F7F5EF; box-shadow: inset 0 0 0 1px #D5D2CC; padding: 10px 8px; }
+.label-sheet--thermal.label-sheet--large { max-width: 432px; }
+.label-sheet__empty { padding: 24px; font-size: 13px; color: var(--a-muted); }
+.label-tag {
+  width: var(--lw); height: var(--lh); padding: var(--lpad); overflow: hidden;
+  background: #FFFFFF; border: 1px dashed #B9BFC6; border-radius: 4px;
+  display: flex; flex-direction: column; justify-content: space-between; color: #000000; font-family: var(--font-body);
+}
+.label-tag__store { font-family: var(--font-head); font-weight: 800; letter-spacing: 0.06em; font-size: var(--fs-store); line-height: 1.1; }
+.label-tag__name { font-weight: 700; font-size: var(--fs-name); line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.label-tag__row { display: flex; justify-content: space-between; align-items: baseline; gap: 4px; }
+.label-tag__variant { font-size: var(--fs-var); line-height: 1.2; }
+.label-tag__price { margin-left: auto; font-weight: 800; font-size: var(--fs-price); line-height: 1.1; }
+.label-tag__bars {
+  width: 100%; height: var(--bc-h);
+  background: repeating-linear-gradient(90deg, #000 0 2px, transparent 2px 3px, #000 3px 4px, transparent 4px 7px, #000 7px 10px, transparent 10px 11px, #000 11px 12px, transparent 12px 14px, #000 14px 15px, transparent 15px 17px);
+}
+.label-tag__qr {
+  width: var(--bc-h); height: var(--bc-h); margin: 0 auto;
+  background:
+    linear-gradient(#000 0 0) 0 0 / 30% 30% no-repeat,
+    linear-gradient(#000 0 0) 100% 0 / 30% 30% no-repeat,
+    linear-gradient(#000 0 0) 0 100% / 30% 30% no-repeat,
+    repeating-conic-gradient(#000 0 25%, #FFFFFF 0 50%) 50% 50% / 25% 25%;
+}
+.label-tag__code { font-family: var(--font-mono); font-size: var(--fs-code); letter-spacing: 0.12em; text-align: center; line-height: 1.3; }
+
+/* Scan test */
+.bc-scan { flex: 1 1 240px; }
+.bc-scan__input { font-size: 15px !important; letter-spacing: 0.08em; }
+.scan-result { display: flex; gap: 14px; align-items: center; border: 1px solid #BBF7D0; background: #F0FDF4; border-radius: var(--r-md); padding: 12px; }
+.scan-result__text { flex: 1; min-width: 0; }
+.scan-result__ok { display: flex; gap: 6px; align-items: center; font-size: 12px; font-weight: 700; color: var(--tone-green-fg); }
+.scan-result__side { text-align: right; flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.scan-result__price { font-family: var(--font-head); font-weight: 700; font-size: 20px; font-variant-numeric: tabular-nums; }
+.fs-15 { font-size: 15px; }
+
+@media (max-width: 639.98px) {
+  .bc-stage { padding: 10px; }
+  .scan-result { flex-wrap: wrap; }
+  .scan-result__side { width: 100%; flex-direction: row; justify-content: space-between; align-items: center; }
+}
+
+/* Print: only the label sheet */
+@media print {
+  .bc-cols { display: block; }
+  .bc-right .card { border: 0; padding: 0; }
+  .bc-stage { background: none; padding: 0; }
+  .label-sheet { box-shadow: none; max-width: none; padding: 0; justify-content: flex-start; }
+  .label-tag { border-color: #DDDDDD; break-inside: avoid; }
+  .label-tag, .label-tag * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
